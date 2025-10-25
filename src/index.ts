@@ -17,7 +17,7 @@ import { handleCookieBanner } from "./pages/util";
     await gotoTipping(page, config.groupId);
     const odds = await retrieveOdds(page);
 
-    const predictions = odds.map(predictGame);
+    const predictions = odds.map((q) => predictGame(q));
 
     await fillInPredictions(page, predictions);
   } catch (error) {
