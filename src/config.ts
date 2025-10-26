@@ -8,10 +8,12 @@ export interface Config {
   predictionStrategy: PredictionStrategy;
 }
 
-const result = dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  const result = dotenv.config();
 
-if (result.error) {
-  throw result.error;
+  if (result.error) {
+    throw result.error;
+  }
 }
 
 export const config: Config = {
