@@ -40,8 +40,8 @@ describe("predictGame", () => {
     ${{ home: 1.01, draw: 10.0, guest: 100.0 }} | ${6}
     ${{ home: 100.0, draw: 10.0, guest: 1.01 }} | ${-6}
   `(
-    "should predict a goal difference of $expected for $odds.home / $odds.draw / $odds.guest quotes using coefficient strategy",
-    ({ odds, expected_diff }: { odds: GameOdds; predictionStrategy: PredictionStrategy; expected_diff: number }) => {
+    "should predict a goal difference of $expected_diff for $odds.home / $odds.draw / $odds.guest odds using coefficient strategy",
+    ({ odds, expected_diff }: { odds: GameOdds; expected_diff: number }) => {
       const goals = predictGame(odds, "coefficient");
       expect(goals.home - goals.guest).toEqual(expected_diff);
     },
@@ -58,8 +58,8 @@ describe("predictGame", () => {
     ${{ home: 1.01, draw: 10.0, guest: 100.0 }} | ${{ home: 1, guest: 0 }}
     ${{ home: 100.0, draw: 10.0, guest: 1.01 }} | ${{ home: 0, guest: 1 }}
   `(
-    "should predict $expected.home : $expected.guest for $odds.home / $odds.draw / $odds.guest quotes using one-to-win strategy",
-    ({ odds, expected }: { odds: GameOdds; predictionStrategy: PredictionStrategy; expected: GameResult }) => {
+    "should predict $expected.home : $expected.guest for $odds.home / $odds.draw / $odds.guest odds using one-to-win strategy",
+    ({ odds, expected }: { odds: GameOdds; expected: GameResult }) => {
       const goals = predictGame(odds, "one-to-win");
 
       if (expected.home === expected.guest) {
