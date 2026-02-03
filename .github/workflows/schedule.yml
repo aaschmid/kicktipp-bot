@@ -26,6 +26,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install chromium
+
       - name: Predict results (Bundesliga Tippspiel)
         env:
           NODE_ENV: production
