@@ -41,11 +41,11 @@ const predictWithDifferenceRatioStrategy = (odds: GameOdds): GameResult => {
   const ratio = ((odds.home > odds.guest ? odds.home / odds.guest : odds.guest / odds.home) / (odds.home + odds.guest)) ** 0.33;
 
   const winnerGoals = Math.round(totalGoals * ratio);
-  const looserGoals = Math.round(totalGoals * (1 - ratio));
+  const loserGoals = Math.round(totalGoals * (1 - ratio));
 
   return odds.home > odds.guest
-    ? { home: looserGoals, guest: winnerGoals === looserGoals ? winnerGoals + 1 : winnerGoals }
-    : { home: winnerGoals === looserGoals ? winnerGoals + 1 : winnerGoals, guest: looserGoals };
+    ? { home: loserGoals, guest: winnerGoals === loserGoals ? winnerGoals + 1 : winnerGoals }
+    : { home: winnerGoals === loserGoals ? winnerGoals + 1 : winnerGoals, guest: loserGoals };
 };
 
 const predictWithCoefficientStrategy = (odds: GameOdds): GameResult => {
@@ -57,10 +57,10 @@ const predictWithCoefficientStrategy = (odds: GameOdds): GameResult => {
     return { home: goals, guest: goals };
   }
 
-  const goals_looser = Math.round(Math.random() * 2);
+  const goals_loser = Math.round(Math.random() * 2);
   return {
-    home: difference < 0 ? Math.min(Math.round(-difference * coefficient), 6) + goals_looser : goals_looser,
-    guest: difference < 0 ? goals_looser : Math.min(Math.round(difference * coefficient), 6) + goals_looser,
+    home: difference < 0 ? Math.min(Math.round(-difference * coefficient), 6) + goals_loser : goals_loser,
+    guest: difference < 0 ? goals_loser : Math.min(Math.round(difference * coefficient), 6) + goals_loser,
   };
 };
 
