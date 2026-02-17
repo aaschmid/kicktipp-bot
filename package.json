@@ -14,9 +14,11 @@
   "scripts": {
     "build": "tsc",
     "start": "tsx src/index.ts",
-    "test": "run-s test:lint license:check test:unit test:build",
+    "test": "run-s test:format test:lint license:check test:unit test:build",
     "license:check": "license-checker-rseidelsohn --production --summary --unknown --onlyAllow \"Apache-2.0;BSD-2-Clause;MIT\"",
     "test:build": "run-s build",
+    "test:format": "prettier --check .",
+    "test:format:fix": "prettier --write .",
     "test:lint": "eslint .",
     "test:lint:fix": "eslint --fix .",
     "test:unit": "vitest run --typecheck",

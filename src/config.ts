@@ -8,7 +8,7 @@ export interface Config {
   predictionStrategy: PredictionStrategy;
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   const result = dotenv.config();
 
   if (result.error) {
