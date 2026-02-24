@@ -35,7 +35,7 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@vitest/coverage-istanbul": "^4.0.18",
     "eslint": "^10.0.2",
     "license-checker-rseidelsohn": "^4.4.2",
