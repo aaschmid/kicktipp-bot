@@ -28,7 +28,7 @@ Signed-off-by: John Doe <john.doe@example.com>
 
 ## Continuous Integration
 
-CI runs on every push via `.github/workflows/ci.yml` and includes, linting, testing, license and type checking.
+CI runs on every push via `.github/workflows/ci.yml` and includes, formatting, linting, testing, license and type checking.
 
 ## Build, Lint, and Test Commands
 
@@ -41,13 +41,22 @@ Scheduled runs are configured in `.github/workflows/schedule.yml`.
 
 ### Testing
 
-- `pnpm test` - Run full test suite (lint, license check, unit tests, build)
+- `pnpm test` - Run full test suite (format, lint, license check, unit tests, build)
 
 Run a specific test file: `pnpm test:unit src/predictor/predictor.test.ts`
+
+### Code Quality
+
+- `pnpm test:format` - Check formatting with Prettier
+- `pnpm test:format:fix` - Fix formatting issues with Prettier
+- `pnpm test:lint` - Check linting with ESLint
+- `pnpm test:lint:fix` - Fix linting issues with ESLint
 
 ## Code Style Guidelines
 
 ### Formatting
+
+Prettier is used for code formatting with the following settings:
 
 - Print width: 140 characters
 - Indentation: 2 spaces
