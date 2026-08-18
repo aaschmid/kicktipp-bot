@@ -6,6 +6,12 @@ export interface GameResult {
   guest: number;
 }
 
+export interface GameQuota {
+  home: number;
+  draw: number;
+  guest: number;
+}
+
 export const gotoTipping = async (page: Page, groupId: string): Promise<void> => {
   await page.goto(`${groupId}/tippabgabe`);
   await page.locator("#tippabgabeForm").waitFor({ state: "visible" });
@@ -25,6 +31,28 @@ export const retrieveOdds = async (page: Page): Promise<GameOdds[]> => {
         result[key] = parseFloat((await oddEntry.locator(".quote-text").textContent()) || "0");
       }
       return result;
+    }),
+  );
+};
+
+// Community quota, displayed on the tippabgabe page as "H - R - G" (e.g. "3 - 9 - 9"). It sits in a text cell that is before tipping and
+// quota cells, so we locate it by its "d - d - d" text pattern rather than by a column index (the column shifts depending on whether the
+// quota is shown at all).
+export const retrieveQuota = async (page: Page): Promise<(GameQuota | undefined)[]> => {
+  const rows = await findRows(page);
+
+  return await Promise.all(
+    rows.map(async (row) => {
+      const cells = await row.locator("td.nw").all();
+      for (const cell of cells) {
+        const text = (await cell.textContent())?.trim() ?? "";
+        const match = text.match(/^(\d+)\s*-\s*(\d+)\s*-\s*(\d+)$/);
+        if (match) {
+          return { home: parseInt(match[1], 10), draw: parseInt(match[2], 10), guest: parseInt(match[3], 10) };
+        }
+      }
+      console.warn("No community quota found for a row; falling back to no quota.");
+      return undefined;
     }),
   );
 };

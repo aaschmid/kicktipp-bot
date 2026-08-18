@@ -1,4 +1,5 @@
-import { GameResult } from "../pages/tipping";
+import { GameQuota, GameResult } from "../pages/tipping";
+import { predictWithExpectedPointsStrategy } from "./expected-points";
 
 export interface GameOdds {
   home: number;
@@ -6,9 +7,9 @@ export interface GameOdds {
   guest: number;
 }
 
-export type PredictionStrategy = "difference-ratio" | "coefficient" | "one-to-win";
+export type PredictionStrategy = "difference-ratio" | "coefficient" | "one-to-win" | "expected-points";
 
-export const predictGame = (odds: GameOdds, strategy: PredictionStrategy = "difference-ratio"): GameResult => {
+export const predictGame = (odds: GameOdds, strategy: PredictionStrategy = "difference-ratio", quota?: GameQuota): GameResult => {
   switch (strategy) {
     case "difference-ratio": {
       return predictWithDifferenceRatioStrategy(odds);
@@ -18,6 +19,9 @@ export const predictGame = (odds: GameOdds, strategy: PredictionStrategy = "diff
     }
     case "one-to-win": {
       return predictWithOneToWinStrategy(odds);
+    }
+    case "expected-points": {
+      return predictWithExpectedPointsStrategy(odds, quota);
     }
     default: {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

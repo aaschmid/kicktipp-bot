@@ -73,3 +73,12 @@ jobs:
           KICKTIPP_GROUP_ID: bundesliga-tippspiel
           KICKTIPP_PREDICTION_STRATEGY: coefficient
         run: pnpm start
+
+      - name: Predict results (Bundesliga Tippspiel - bot3)
+        env:
+          NODE_ENV: production
+          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_BOT3_USERNAME }}
+          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_BOT_PASSWORD }}
+          KICKTIPP_GROUP_ID: bundesliga-tippspiel
+          KICKTIPP_PREDICTION_STRATEGY: expected-points
+        run: pnpm start

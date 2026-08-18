@@ -1,4 +1,5 @@
 .env
 .idea/
+.pnpm-store/
 build/
 node_modules/

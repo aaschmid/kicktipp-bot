@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import { login } from "./pages/login";
 import { config } from "./config";
-import { fillInPredictions, gotoTipping, retrieveOdds } from "./pages/tipping";
+import { fillInPredictions, gotoTipping, retrieveOdds, retrieveQuota } from "./pages/tipping";
 import { predictGame } from "./predictor/predictor";
 import { handleCookieBanner } from "./pages/util";
 
@@ -16,8 +16,9 @@ import { handleCookieBanner } from "./pages/util";
 
     await gotoTipping(page, config.groupId);
     const odds = await retrieveOdds(page);
+    const quotas = await retrieveQuota(page);
 
-    const predictions = odds.map((q) => predictGame(q, config.predictionStrategy));
+    const predictions = odds.map((q, i) => predictGame(q, config.predictionStrategy, quotas[i]));
 
     await fillInPredictions(page, predictions);
   } catch (error) {
