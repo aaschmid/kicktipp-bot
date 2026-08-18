@@ -29,20 +29,47 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install chromium
 
-      - name: Predict results (Bundesliga Tippspiel)
-        env:
-          NODE_ENV: production
-          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_USERNAME }}
-          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_PASSWORD }}
-          KICKTIPP_GROUP_ID: bundesliga-tippspiel
-          KICKTIPP_PREDICTION_STRATEGY: difference-ratio
-        run: pnpm start
-
-      - name: Predict results (private one)
+      - name: Predict results (main account)
         env:
           NODE_ENV: production
           KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_USERNAME }}
           KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_PASSWORD }}
           KICKTIPP_GROUP_ID: ${{ secrets.KICKTIPP_GROUP_ID }}
+          KICKTIPP_PREDICTION_STRATEGY: one-to-win
+        run: pnpm start
+
+      - name: Predict results (bot account)
+        env:
+          NODE_ENV: production
+          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_BOT_USERNAME }}
+          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_BOT_PASSWORD }}
+          KICKTIPP_GROUP_ID: ${{ secrets.KICKTIPP_GROUP_ID }}
           KICKTIPP_PREDICTION_STRATEGY: difference-ratio
+        run: pnpm start
+
+      - name: Predict results (Bundesliga Tippspiel - bot)
+        env:
+          NODE_ENV: production
+          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_BOT_USERNAME }}
+          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_BOT_PASSWORD }}
+          KICKTIPP_GROUP_ID: bundesliga-tippspiel
+          KICKTIPP_PREDICTION_STRATEGY: one-to-win
+        run: pnpm start
+
+      - name: Predict results (Bundesliga Tippspiel - bot1)
+        env:
+          NODE_ENV: production
+          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_BOT1_USERNAME }}
+          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_BOT_PASSWORD }}
+          KICKTIPP_GROUP_ID: bundesliga-tippspiel
+          KICKTIPP_PREDICTION_STRATEGY: difference-ratio
+        run: pnpm start
+
+      - name: Predict results (Bundesliga Tippspiel - bot2)
+        env:
+          NODE_ENV: production
+          KICKTIPP_USERNAME: ${{ secrets.KICKTIPP_BOT2_USERNAME }}
+          KICKTIPP_PASSWORD: ${{ secrets.KICKTIPP_BOT_PASSWORD }}
+          KICKTIPP_GROUP_ID: bundesliga-tippspiel
+          KICKTIPP_PREDICTION_STRATEGY: coefficient
         run: pnpm start
