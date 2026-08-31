@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@playwright/browser-chromium": "^1.62.1",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.4.0",
     "dotenv": "^17.4.2",
     "playwright": "^1.62.1",
     "ts-node": "^10.9.2",
