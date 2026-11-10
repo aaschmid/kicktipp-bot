@@ -11,6 +11,7 @@
   "engines": {
     "node": ">=24"
   },
+  "packageManager": "pnpm@12.9.0",
   "scripts": {
     "build": "tsc",
     "start": "tsx src/index.ts",
