@@ -1,5 +1,12 @@
 # Agent Guidelines for kicktipp-bot
 
+## JSON edit validation
+
+After using the edit tool on a JSON file (package.json, tsconfig.json, biome.json, ...), immediately
+validate it with `node -e "JSON.parse(require('fs').readFileSync('<file>', 'utf8'))"` before the next
+command. Multi-block edits can displace closing braces or add trailing commas that only surface later
+as cryptic errors from other tools.
+
 ## Commits
 
 All commits must follow this format and be signed off:
@@ -81,6 +88,12 @@ Biome is used for both formatting and linting, configured in `biome.json` with t
 - Name strategy functions like `predictWith<StrategyName>Strategy`
 - Use most minimal named exports for most functions/types and group imports: local imports first, then external
 - Minimal inline comments, i.e. comment only non-obvious logic or external references
+
+## Tooling migrations
+
+When a change swaps build or lint tooling (package manager, formatter, linter, test runner), grep
+`AGENTS.md` and `README.md` for the old tool's name and update them in the same commit. Docs describing
+tooling rot silently because no linter reads them.
 
 ### Test Writing Guidelines
 
