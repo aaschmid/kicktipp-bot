@@ -28,9 +28,11 @@ Signed-off-by: John Doe <john.doe@example.com>
 
 ## Continuous Integration
 
-CI runs on every push via `.github/workflows/ci.yml` and includes, formatting, linting, testing, license and type checking.
+CI runs on every push via `.github/workflows/ci.yml` and includes formatting, linting, license, unit test, and build checks.
 
 ## Build, Lint, and Test Commands
+
+Local pnpm is pinned via `packageManager` in `package.json` (pnpm 12); run `pnpm install` after dependency changes.
 
 ### Primary Commands
 
@@ -47,20 +49,22 @@ Run a specific test file: `pnpm test:unit src/predictor/predictor.test.ts`
 
 ### Code Quality
 
-- `pnpm test:format` - Check formatting with Prettier
-- `pnpm test:format:fix` - Fix formatting issues with Prettier
-- `pnpm test:lint` - Check linting with ESLint
-- `pnpm test:lint:fix` - Fix linting issues with ESLint
+- `pnpm test:format` - Check formatting with Biome
+- `pnpm test:format:fix` - Fix formatting issues with Biome
+- `pnpm test:lint` - Check linting with Biome
+- `pnpm test:lint:fix` - Fix linting issues with Biome
+- License check lives in `scripts/check-licenses.mjs` (wraps `pnpm licenses list --prod --json`, fails on licenses outside the allowlist)
 
 ## Code Style Guidelines
 
 ### Formatting
 
-Prettier is used for code formatting with the following settings:
+Biome is used for both formatting and linting, configured in `biome.json` with the following settings:
 
 - Print width: 140 characters
 - Indentation: 2 spaces
-- Trailing commas: always
+- Double quotes
+- Trailing commas: all
 - Line endings: LF
 
 ### Coding Conventions
@@ -90,6 +94,7 @@ For switch statements over union types, include a default case that throws:
 
 ```typescript
 default: {
+  // biome-ignore lint/correctness/noUnusedVariables: needed for exhaustive switch check
   const exhaustiveCheck: never = strategy;
   throw new Error(`Strategy ${strategy} not supported.`);
 }
