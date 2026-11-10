@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import type { Page } from "playwright";
 
 export const login = async (page: Page, username: string, password: string): Promise<void> => {
   await page.goto("/info/profil/login");

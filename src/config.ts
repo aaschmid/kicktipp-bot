@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { PredictionStrategy } from "./predictor/predictor";
+import type { PredictionStrategy } from "./predictor/predictor";
 
 export interface Config {
   username: string;

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { type GameOdds } from "./predictor";
+import type { GameOdds } from "./predictor";
 import { kicktippPayoff, predictWithExpectedPointsStrategy } from "./expected-points";
-import { GameQuota } from "../pages/tipping";
+import type { GameQuota } from "../pages/tipping";
 
 describe("predictWithExpectedPointsStrategy", () => {
   test("should predict a draw for a game where the draw is the clear favorite", () => {

@@ -1,4 +1,4 @@
-import { Page } from "playwright";
+import type { Page } from "playwright";
 
 export const handleCookieBanner = async (page: Page): Promise<void> => {
   await page.addLocatorHandler(page.getByRole("dialog"), async () => {

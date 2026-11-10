@@ -1,5 +1,5 @@
-import { Locator, Page } from "playwright";
-import { GameOdds } from "../predictor/predictor";
+import type { Locator, Page } from "playwright";
+import type { GameOdds } from "../predictor/predictor";
 
 export interface GameResult {
   home: number;
@@ -61,7 +61,7 @@ export const fillInPredictions = async (page: Page, predictions: GameResult[]): 
   console.log("Submitting predictions...");
   const rows = await findRows(page);
 
-  if (rows.length != predictions.length) {
+  if (rows.length !== predictions.length) {
     throw new Error(`Expect ${predictions.length} games but found ${rows.length}.`);
   }
 
@@ -70,7 +70,7 @@ export const fillInPredictions = async (page: Page, predictions: GameResult[]): 
     const prediction = predictions[i];
 
     const boxTip = row.locator("td.kicktipp-tippabgabe");
-    if ((await boxTip.count()) != 1) {
+    if ((await boxTip.count()) !== 1) {
       console.warn(`No more tipping allowed for game ${i} (predicted result -> ${prediction.home} : ${prediction.guest}).`);
       continue;
     }

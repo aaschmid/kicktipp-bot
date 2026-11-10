@@ -1,4 +1,4 @@
-import { GameQuota, GameResult } from "../pages/tipping";
+import type { GameQuota, GameResult } from "../pages/tipping";
 import { predictWithExpectedPointsStrategy } from "./expected-points";
 
 export interface GameOdds {
@@ -24,7 +24,7 @@ export const predictGame = (odds: GameOdds, strategy: PredictionStrategy = "diff
       return predictWithExpectedPointsStrategy(odds, quota);
     }
     default: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // biome-ignore lint/correctness/noUnusedVariables: needed for exhaustive switch check
       const exhaustiveCheck: never = strategy;
       throw new Error(`Strategy ${strategy} not supported.`);
     }

@@ -1,5 +1,5 @@
-import { GameQuota, GameResult } from "../pages/tipping";
-import { GameOdds } from "./predictor";
+import type { GameQuota, GameResult } from "../pages/tipping";
+import type { GameOdds } from "./predictor";
 
 // --- Expected-points maximization strategy (Quotenregel) ----------------
 //
@@ -27,7 +27,7 @@ const MAX_GOALS = 10;
 const MAX_TIP_GOALS = 6;
 
 const poissonPmf = (k: number, lambda: number): number => {
-  return (Math.exp(-lambda) * Math.pow(lambda, k)) / factorial(k);
+  return (Math.exp(-lambda) * lambda ** k) / factorial(k);
 };
 
 const factorial = (n: number): number => (n <= 1 ? 1 : n * factorial(n - 1));
@@ -76,8 +76,7 @@ const fitPoissonLambdas = (target: { home: number; draw: number; guest: number }
     for (let lg = 0.05; lg <= 5.0; lg += 0.05) {
       const matrix = scorelineProbabilities(lh, lg);
       const actual = oneXTwoFromMatrix(matrix);
-      const err =
-        Math.pow(actual.home - target.home, 2) + Math.pow(actual.draw - target.draw, 2) + Math.pow(actual.guest - target.guest, 2);
+      const err = (actual.home - target.home) ** 2 + (actual.draw - target.draw) ** 2 + (actual.guest - target.guest) ** 2;
       if (err < bestErr) {
         bestErr = err;
         bestLh = lh;

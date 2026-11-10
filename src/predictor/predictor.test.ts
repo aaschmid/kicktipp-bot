@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { type GameOdds, predictGame } from "./predictor";
-import { GameResult } from "../pages/tipping";
+import type { GameResult } from "../pages/tipping";
 
 describe("predictGame", () => {
   test.each`

@@ -18,12 +18,12 @@
     "test": "run-s test:format test:lint license:check test:unit test:build",
     "license:check": "node scripts/check-licenses.mjs",
     "test:build": "run-s build",
-    "test:format": "prettier --check .",
-    "test:format:fix": "prettier --write .",
-    "test:lint": "eslint .",
-    "test:lint:fix": "eslint --fix .",
+    "test:format": "biome format .",
+    "test:format:fix": "biome format --write .",
+    "test:lint": "biome check --formatter-enabled=false .",
+    "test:lint:fix": "biome check --formatter-enabled=false --write .",
     "test:unit": "vitest run --typecheck",
-    "test:ui": "vitest  --typecheck --ui",
+    "test:ui": "vitest --typecheck --ui",
     "test:watch": "vitest --typecheck"
   },
   "dependencies": {
@@ -36,17 +36,9 @@
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@biomejs/biome": "^2.3.12",
     "@vitest/coverage-istanbul": "^5.0.2",
-    "eslint": "^10.14.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.9.10",
-    "typescript-eslint": "^8.72.1",
     "vitest": "^5.0.2"
-  },
-  "prettier": {
-    "printWidth": 140,
-    "tabWidth": 2,
-    "trailingComma": "all"
   }
 }
