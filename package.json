@@ -27,7 +27,7 @@
     "test:watch": "vitest --typecheck"
   },
   "dependencies": {
-    "@playwright/browser-chromium": "^1.65.0",
+    "@playwright/browser-chromium": "^1.65.1",
     "@types/node": "^26.6.6",
     "dotenv": "^18.0.10",
     "playwright": "^1.65.0",
